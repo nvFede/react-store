@@ -1,39 +1,83 @@
-import React from "react";
+import React, { useRef } from "react";
 
 const Login = () => {
+  const form = useRef(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(form.current);
+
+    const data = {
+      username: formData.get("username"),
+      password: formData.get("password"),
+    };
+    console.log(data);
+  };
+
   return (
-    <div className="w-full max-w-sm bg-slate-100 p-10 rounded-lg">
-      <div class="flex flex-column items-center justify-center lg:justify-start">
-        <img src="./logos/logo_yard_sale.svg" alt="logo" className="logo" />
-        <h1 className="title">Create a new password</h1>
-        <p className="subtitle">Enter a new password for your account</p>
-        <form action="/" className="form">
-          <label for="password" className="label">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            placeholder="*********"
-            class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          />
-          <label for="new-password" className="label">
-            Password
-          </label>
-          <input
-            type="password"
-            id="new-password"
-            placeholder="*********"
-            class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          />
-          <input
-            type="submit"
-            value="Confirm"
-            class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-          />
-        </form>
+    <section className=" min-h-screen flex flex-col">
+      <div className="container  mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <div className="shadow-lg p-10 ">
+          <form className="form" ref={form}>
+            <div className="mb-4">
+              <label
+                className="block text-grey-darker text-sm font-bold mb-2"
+                htmlFor="username"
+              >
+                Username
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+                id="username"
+                type="text"
+                placeholder="Username"
+                name="username"
+              />
+            </div>
+            <div className="mb-6">
+              <label
+                className="block text-grey-darker text-sm font-bold mb-2"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
+                id="password"
+                type="password"
+                placeholder="******************"
+                name="password"
+              />
+              {/* <p className="text-red text-xs italic">Please choose a password.</p> */}
+            </div>
+            <div className="flex items-center justify-between">
+              <button
+                className="bg-blue-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+                type="button"
+                onClick={handleSubmit}
+              >
+                Sign In
+              </button>
+              <a
+                className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
+                href="#"
+              >
+                Forgot Password?
+              </a>
+            </div>
+          </form>
+          <p className="text-sm mt-5">
+            Don't have an account?{" "}
+            <a
+              className="inline-block border-b botder-gray-50 font-bold"
+              href="/signup"
+            >
+              Sign Up
+            </a>
+          </p>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
